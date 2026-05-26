@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="吴保霖 · AI 智能标注师" />
+  <title>吴保霖 · 个人主页</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!--
+    影视背景：请将《仙剑奇侠传》电视剧剧照放入 images 文件夹
+    · drama-bg.jpg   — 可选，一张横版双人/海报图（优先使用）
+    · drama-li.jpg   — 李逍遥（胡歌）单人或半身剧照
+    · drama-zhao.jpg — 赵灵儿（刘亦菲）单人或半身剧照
+  -->
+  <div class="tv-scene" aria-hidden="true">
+    <div class="tv-scene__poster" role="img" aria-label="仙剑奇侠传电视剧背景"></div>
+    <figure class="tv-hero tv-hero--li">
+      <img src="images/drama-li.jpg" alt="" width="960" height="1280" decoding="async" />
+    </figure>
+    <figure class="tv-hero tv-hero--zhao">
+      <img src="images/drama-zhao.jpg" alt="" width="960" height="1280" decoding="async" />
+    </figure>
+    <div class="tv-scene__vignette"></div>
+    <div class="tv-scene__mist"></div>
+    <div class="tv-scene__grain"></div>
+  </div>
+
+  <div class="leaves" aria-hidden="true">
+    <span class="leaf"></span>
+    <span class="leaf"></span>
+    <span class="leaf"></span>
+  </div>
+
+  <div class="hero-avatar">
+    <div class="avatar-wrap">
+      <div class="avatar-frame" aria-hidden="true"></div>
+      <img
+        class="avatar"
+        src="214bca3dac403465c765e159e94abedb.jpg"
+        alt="吴保霖"
+        width="120"
+        height="120"
+      />
+    </div>
+  </div>
+
+  <main class="scroll">
+    <div class="scroll-aura" aria-hidden="true"></div>
+    <svg class="scroll-silk" viewBox="0 0 420 520" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="silkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#f0e0a8" />
+          <stop offset="35%" stop-color="#c9a84c" />
+          <stop offset="65%" stop-color="#9ecfc4" />
+          <stop offset="100%" stop-color="#e8cc6a" />
+        </linearGradient>
+      </defs>
+      <path
+        class="scroll-silk__path"
+        d="M32 48
+           Q8 120 24 200 Q4 280 28 360 Q12 440 36 480
+           Q120 508 210 500 Q300 508 384 480
+           Q408 440 392 360 Q416 280 396 200 Q412 120 388 48
+           Q300 16 210 24 Q120 16 32 48 Z"
+        fill="none"
+        stroke="url(#silkGrad)"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        vector-effect="non-scaling-stroke"
+      />
+    </svg>
+    <span class="ribbon ribbon--tl" aria-hidden="true"></span>
+    <span class="ribbon ribbon--tr" aria-hidden="true"></span>
+    <span class="ribbon ribbon--bl" aria-hidden="true"></span>
+    <span class="ribbon ribbon--br" aria-hidden="true"></span>
+
+    <div class="scroll-inner">
+      <header class="scroll-head">
+        <span class="seal" aria-hidden="true">剑</span>
+        <p class="scroll-motto">快意江湖 · 纵马长空</p>
+      </header>
+
+      <div class="scroll-info">
+        <h1 class="name">吴保霖</h1>
+        <p class="jianghu-rank">图像判官 · AI 标注行道</p>
+        <p class="jianghu-desc">
+          行走智能江湖，专司图片明辨；<br />
+          一招一式，但求丝毫不爽。
+        </p>
+      </div>
+
+      <div class="jianghu-divider" aria-hidden="true">
+        <span class="jianghu-divider__blade"></span>
+        <span class="jianghu-divider__text">江湖路远，有缘相见</span>
+        <span class="jianghu-divider__blade"></span>
+      </div>
+
+      <section class="contact" aria-label="联系方式">
+        <ul class="contact-list">
+          <li>
+            <a class="contact-link" href="tel:18054403008">
+              <span class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path d="M5 4h4l2 5-2 1a13 13 0 006 6l1-2 5 2v4a2 2 0 01-2 2A16 16 0 015 6a2 2 0 012-2z" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="contact-text">18054403008</span>
+            </a>
+          </li>
+          <li>
+            <a class="contact-link" href="mailto:867923294@qq.com">
+              <span class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+                  <path d="M4 7l8 5 8-5M4 7v10h16V7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="contact-text">867923294@qq.com</span>
+            </a>
+          </li>
+          <li>
+            <button type="button" class="contact-link contact-link--wechat" id="wechat-btn">
+              <span class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8.5 3C4.91 3 2 5.35 2 8.26c0 1.5.8 2.85 2.05 3.88L3.5 17l4.12-1.62c.68.19 1.4.3 2.15.3.28 0 .55-.02.82-.05-.17-.55-.26-1.13-.26-1.73 0-3.48 3.13-6.3 7-6.3.34 0 .67.02 1 .06C18.09 4.92 13.58 3 8.5 3zm-3 5.25a1 1 0 110-2 1 1 0 010 2zm5.5 0a1 1 0 110-2 1 1 0 010 2zM22 12.74c0-2.5-2.46-4.52-5.5-4.52-3.04 0-5.5 2.02-5.5 4.52 0 2.5 2.46 4.52 5.5 4.52.6 0 1.18-.08 1.73-.23L20.5 19l-1.28-3.05c.82-.94 1.28-2.1 1.28-3.21zM14 11.5a.75.75 0 110-1.5.75.75 0 010 1.5zm4 0a.75.75 0 110-1.5.75.75 0 010 1.5z"/>
+                </svg>
+              </span>
+              <span class="contact-text">一键联系微信</span>
+            </button>
+          </li>
+        </ul>
+      </section>
+
+      <footer class="footer">
+        <span class="sword-mark" aria-hidden="true"></span>
+        <span>© 2026 · 杯酒江湖，快意平生</span>
+      </footer>
+    </div>
+  </main>
+
+  <p class="tv-hint" id="tv-hint" hidden>
+    请将剧照放入 <code>images</code> 文件夹：<code>drama-bg.jpg</code>（横版双人，推荐）或 <code>drama-li.jpg</code> + <code>drama-zhao.jpg</code>
+  </p>
+
+  <audio id="bgm" loop preload="auto" src="audio/guanggun.mp3"></audio>
+  <button type="button" class="music-btn" id="music-btn" aria-label="播放背景音乐《光棍》" title="《光棍》">
+    <span class="music-btn__icon" aria-hidden="true">♪</span>
+    <span class="music-btn__label">光棍</span>
+  </button>
+
+  <div class="wechat-modal" id="wechat-modal" hidden>
+    <div class="wechat-modal__backdrop" data-close-wechat></div>
+    <div class="wechat-modal__panel" role="dialog" aria-labelledby="wechat-modal-title">
+      <button type="button" class="wechat-modal__close" data-close-wechat aria-label="关闭">×</button>
+      <h3 class="wechat-modal__title" id="wechat-modal-title">加我微信</h3>
+      <img class="wechat-modal__qr" id="wechat-qr" src="images/wechat-qr.jpg" alt="微信二维码" hidden />
+      <p class="wechat-modal__hint" id="wechat-qr-hint">扫码或搜索手机号添加好友</p>
+      <p class="wechat-modal__phone">18054403008</p>
+      <div class="wechat-modal__actions">
+        <button type="button" class="wechat-modal__btn" id="wechat-copy">复制手机号</button>
+        <button type="button" class="wechat-modal__btn wechat-modal__btn--primary" id="wechat-open">打开微信</button>
+      </div>
+    </div>
+  </div>
+
+  <p class="toast" id="toast" role="status" aria-live="polite" hidden></p>
+
+  <script>
+    (function () {
+      var poster = document.querySelector(".tv-scene__poster");
+      var heroes = document.querySelectorAll(".tv-hero img");
+      var hint = document.getElementById("tv-hint");
+      var pending = 1 + heroes.length;
+      var anyOk = false;
+
+      function done(ok) {
+        if (ok) anyOk = true;
+        pending -= 1;
+        if (pending > 0) return;
+        if (!anyOk && hint) hint.hidden = false;
+        if (anyOk && poster) {
+          document.body.classList.add("tv-scene--ready");
+        }
+      }
+
+      function probe(url, cb) {
+        var img = new Image();
+        img.onload = function () { cb(true); };
+        img.onerror = function () { cb(false); };
+        img.src = url;
+      }
+
+      var posterUrls = [
+        "images/drama-bg.jpg",
+        "4182ed0f92a8f6abfc937dca951f06d57fb91429.jpg"
+      ];
+
+      (function tryPoster(i) {
+        if (i >= posterUrls.length) {
+          done(false);
+          return;
+        }
+        probe(posterUrls[i], function (ok) {
+          if (ok) {
+            poster.style.backgroundImage = 'url("' + posterUrls[i] + '")';
+            document.body.classList.add("tv-scene--poster");
+            anyOk = true;
+            done(true);
+          } else {
+            tryPoster(i + 1);
+          }
+        });
+      })(0);
+
+      heroes.forEach(function (img) {
+        probe(img.getAttribute("src"), function (ok) {
+          if (!ok) img.closest(".tv-hero").classList.add("tv-hero--missing");
+          done(ok);
+        });
+      });
+
+      var PHONE = "18054403008";
+      var toast = document.getElementById("toast");
+      var toastTimer;
+
+      function showToast(msg) {
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.hidden = false;
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () {
+          toast.hidden = true;
+        }, 2800);
+      }
+
+      function copyPhone() {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(PHONE).then(function () {
+            showToast("已复制手机号 " + PHONE);
+          });
+        }
+        var ta = document.createElement("textarea");
+        ta.value = PHONE;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand("copy");
+          showToast("已复制手机号 " + PHONE);
+        } catch (e) {
+          showToast("请手动添加：" + PHONE);
+        }
+        document.body.removeChild(ta);
+        return Promise.resolve();
+      }
+
+      var wechatModal = document.getElementById("wechat-modal");
+      var wechatQr = document.getElementById("wechat-qr");
+      var wechatQrHint = document.getElementById("wechat-qr-hint");
+
+      function openWechatModal() {
+        if (!wechatModal) return;
+        wechatModal.hidden = false;
+        document.body.classList.add("modal-open");
+      }
+
+      function closeWechatModal() {
+        if (!wechatModal) return;
+        wechatModal.hidden = true;
+        document.body.classList.remove("modal-open");
+      }
+
+      document.querySelectorAll("[data-close-wechat]").forEach(function (el) {
+        el.addEventListener("click", closeWechatModal);
+      });
+
+      if (wechatQr) {
+        wechatQr.addEventListener("load", function () {
+          wechatQr.hidden = false;
+          if (wechatQrHint) wechatQrHint.textContent = "扫码加我微信";
+        });
+        wechatQr.addEventListener("error", function () {
+          wechatQr.hidden = true;
+          if (wechatQrHint) wechatQrHint.textContent = "未检测到二维码图片，请搜索手机号添加";
+        });
+      }
+
+      var wechatBtn = document.getElementById("wechat-btn");
+      if (wechatBtn) {
+        wechatBtn.addEventListener("click", function () {
+          openWechatModal();
+          copyPhone();
+        });
+      }
+
+      var wechatCopy = document.getElementById("wechat-copy");
+      if (wechatCopy) wechatCopy.addEventListener("click", copyPhone);
+
+      var wechatOpen = document.getElementById("wechat-open");
+      if (wechatOpen) {
+        wechatOpen.addEventListener("click", function () {
+          copyPhone().finally(function () {
+            window.location.href = "weixin://";
+          });
+        });
+      }
+
+      var bgm = document.getElementById("bgm");
+      var musicBtn = document.getElementById("music-btn");
+      var musicReady = false;
+
+      function setMusicPlaying(playing) {
+        if (!musicBtn) return;
+        musicBtn.classList.toggle("music-btn--playing", playing);
+        musicBtn.setAttribute("aria-label", playing ? "暂停《光棍》" : "播放《光棍》");
+      }
+
+      function markMusicReady() {
+        musicReady = true;
+        if (musicBtn) musicBtn.classList.remove("music-btn--missing");
+      }
+
+      if (bgm) {
+        bgm.addEventListener("loadeddata", markMusicReady);
+        bgm.addEventListener("canplay", markMusicReady);
+        if (bgm.readyState >= 2) markMusicReady();
+        bgm.addEventListener("error", function () {
+          musicReady = false;
+          if (musicBtn) musicBtn.classList.add("music-btn--missing");
+          showToast("音乐加载失败，请用本地服务器打开页面");
+        });
+      }
+
+      if (musicBtn && bgm) {
+        musicBtn.addEventListener("click", function () {
+          if (bgm.paused) {
+            bgm.play().then(function () {
+              markMusicReady();
+              setMusicPlaying(true);
+            }).catch(function () {
+              if (location.protocol === "file:") {
+                showToast("请用 Live Server 打开，或运行: npx serve .");
+              } else {
+                showToast("无法播放，请再点一次或检查 audio/guanggun.mp3");
+              }
+            });
+          } else {
+            bgm.pause();
+            setMusicPlaying(false);
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

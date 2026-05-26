@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <defs>
+    <linearGradient id="skin" x1="60" y1="30" x2="60" y2="90">
+      <stop offset="0%" stop-color="#fde8d0"/>
+      <stop offset="100%" stop-color="#f5d4b8"/>
+    </linearGradient>
+    <linearGradient id="hair" x1="30" y1="10" x2="90" y2="50">
+      <stop offset="0%" stop-color="#4a3728"/>
+      <stop offset="100%" stop-color="#6b4f3a"/>
+    </linearGradient>
+    <radialGradient id="cheek" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f4a8a0" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#f4a8a0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- sky wash behind character -->
+  <rect width="120" height="120" rx="60" fill="#e8f4f8"/>
+  <ellipse cx="60" cy="95" rx="50" ry="18" fill="#8bc98a" opacity="0.5"/>
+  <!-- hair -->
+  <path d="M28 52 Q24 28 60 22 Q96 28 92 52 Q94 38 60 34 Q26 38 28 52Z" fill="url(#hair)"/>
+  <!-- face -->
+  <ellipse cx="60" cy="58" rx="32" ry="34" fill="url(#skin)"/>
+  <!-- cheeks -->
+  <ellipse cx="42" cy="62" rx="8" ry="5" fill="url(#cheek)"/>
+  <ellipse cx="78" cy="62" rx="8" ry="5" fill="url(#cheek)"/>
+  <!-- eyes (Ghibli simple) -->
+  <ellipse cx="48" cy="56" rx="5" ry="6" fill="#3d3228"/>
+  <ellipse cx="72" cy="56" rx="5" ry="6" fill="#3d3228"/>
+  <circle cx="50" cy="54" r="1.5" fill="#fff" opacity="0.9"/>
+  <circle cx="74" cy="54" r="1.5" fill="#fff" opacity="0.9"/>
+  <!-- smile -->
+  <path d="M52 68 Q60 74 68 68" stroke="#c47d5a" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- collar hint -->
+  <path d="M38 88 Q60 96 82 88 L82 100 Q60 108 38 100Z" fill="#e8d4f0" opacity="0.8"/>
+</svg>

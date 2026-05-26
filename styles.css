@@ -1,0 +1,1050 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --jade: #3d7a7a;
+  --jade-glow: #5aabab;
+  --gold: #c9a84c;
+  --gold-bright: #e8cc6a;
+  --cinnabar: #a83232;
+  --scroll-bg: #f0e2c4;
+  --scroll-inner: #f8f0dc;
+  --wood: #3d2818;
+  --wood-light: #6b4a2a;
+  --ink: #1a1408;
+  --ink-soft: #4a3d30;
+  --tv-fallback: #1a2228;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100dvh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 1rem max(1rem, env(safe-area-inset-bottom));
+  font-family: "Noto Serif SC", "SimSun", "STSong", serif;
+  color: var(--ink);
+  overflow-x: hidden;
+  position: relative;
+  background: var(--tv-fallback);
+}
+
+/* —— 电视剧剧照背景 —— */
+.tv-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, #2a3540 0%, #1a2830 40%, #243838 100%);
+}
+
+.tv-scene__poster {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 20%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity 1.2s ease, transform 8s ease;
+}
+
+body.tv-scene--poster .tv-scene__poster {
+  opacity: 1;
+  transform: scale(1);
+  background-position: center 18%;
+  background-size: cover;
+}
+
+body.tv-scene--poster .tv-hero {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.tv-hero {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  width: 52%;
+  max-width: 520px;
+  margin: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+body.tv-scene--ready:not(.tv-scene--poster) .tv-hero:not(.tv-hero--missing) {
+  opacity: 1;
+}
+
+.tv-hero--li {
+  left: 0;
+}
+
+.tv-hero--zhao {
+  right: 0;
+}
+
+.tv-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: saturate(0.92) contrast(1.02);
+}
+
+.tv-hero--li img {
+  object-position: 65% 15%;
+  mask-image: linear-gradient(90deg, #000 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, #000 55%, transparent 100%);
+}
+
+.tv-hero--zhao img {
+  object-position: 35% 15%;
+  mask-image: linear-gradient(270deg, #000 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(270deg, #000 55%, transparent 100%);
+}
+
+.tv-scene__vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(8, 12, 18, 0.15) 0%,
+      transparent 18%,
+      transparent 58%,
+      rgba(8, 12, 18, 0.35) 72%,
+      rgba(8, 12, 18, 0.92) 100%
+    );
+  pointer-events: none;
+}
+
+body.tv-scene--poster .tv-scene__vignette {
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 50%,
+      rgba(8, 12, 18, 0.25) 65%,
+      rgba(8, 12, 18, 0.9) 100%
+    );
+}
+
+.tv-scene__mist {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(180, 210, 220, 0.08) 0%,
+    transparent 40%,
+    rgba(200, 220, 210, 0.12) 100%
+  );
+  animation: tvMist 14s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes tvMist {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.tv-scene__grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* 落叶 */
+.leaves {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.leaf {
+  position: absolute;
+  width: 10px;
+  height: 6px;
+  background: #8a9a6a;
+  border-radius: 0 80% 0 80%;
+  opacity: 0.35;
+  animation: leafFall linear infinite;
+}
+
+.leaf:nth-child(1) { left: 20%; animation-duration: 18s; }
+.leaf:nth-child(2) { left: 55%; animation-duration: 22s; animation-delay: -6s; }
+.leaf:nth-child(3) { left: 78%; animation-duration: 16s; animation-delay: -3s; }
+
+@keyframes leafFall {
+  0% {
+    transform: translateY(-5vh) rotate(0deg);
+    opacity: 0;
+  }
+  15% { opacity: 0.4; }
+  100% {
+    transform: translateY(105vh) rotate(540deg) translateX(40px);
+    opacity: 0;
+  }
+}
+
+/* 未放入剧照时的提示 */
+.tv-hint {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  max-width: 90%;
+  padding: 0.65rem 1rem;
+  font-size: 0.75rem;
+  color: #e8e0d0;
+  background: rgba(20, 28, 36, 0.88);
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  border-radius: 6px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.tv-hint code {
+  font-family: Consolas, monospace;
+  color: var(--gold-bright);
+  font-size: 0.85em;
+}
+
+/* 个人头像 · 男主角左上方 */
+.hero-avatar {
+  position: fixed;
+  z-index: 2;
+  top: max(0.75rem, env(safe-area-inset-top));
+  left: max(0.75rem, env(safe-area-inset-left));
+  pointer-events: none;
+  animation: avatarFloatIn 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+body.tv-scene--poster .hero-avatar {
+  top: 11%;
+  left: 6%;
+}
+
+body.tv-scene--ready:not(.tv-scene--poster) .hero-avatar {
+  top: 8%;
+  left: 5%;
+}
+
+@keyframes avatarFloatIn {
+  from {
+    opacity: 0;
+    transform: translate(-8px, -12px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+.hero-avatar .avatar-wrap {
+  width: 92px;
+  height: 92px;
+  pointer-events: auto;
+  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+}
+
+/* —— 古卷轴名片 · 底栏不挡人物 —— */
+.scroll {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 520px;
+  max-height: min(52vh, 400px);
+  padding: 0.85rem 1.15rem 1rem;
+  text-align: center;
+  border: none;
+  border-radius: 20px 20px 12px 12px / 20px 20px 10px 10px;
+  background: linear-gradient(
+    165deg,
+    rgba(252, 248, 238, 0.94) 0%,
+    rgba(245, 232, 210, 0.9) 100%
+  );
+  box-shadow:
+    0 -8px 32px rgba(0, 0, 0, 0.2),
+    0 0 32px rgba(201, 168, 76, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: scrollUnfurl 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  overflow: visible;
+  isolation: isolate;
+  flex-shrink: 0;
+}
+
+.scroll-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.scroll-aura {
+  position: absolute;
+  inset: -14px;
+  z-index: -2;
+  border-radius: inherit;
+  background: conic-gradient(
+    from 0deg,
+    rgba(201, 168, 76, 0.55),
+    rgba(158, 207, 196, 0.45),
+    rgba(232, 212, 240, 0.35),
+    rgba(212, 168, 76, 0.5),
+    rgba(201, 168, 76, 0.55)
+  );
+  filter: blur(10px);
+  opacity: 0.65;
+  animation: auraSpin 14s linear infinite;
+}
+
+@keyframes auraSpin {
+  to { transform: rotate(360deg); }
+}
+
+.scroll::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 28px 10px 32px 12px / 12px 30px 10px 28px;
+  border: 1px solid rgba(201, 168, 124, 0.35);
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+  animation: innerBreath 5s ease-in-out infinite;
+}
+
+@keyframes innerBreath {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+.scroll::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(
+    120deg,
+    #e8cc6a,
+    #b8e4dc,
+    #f4ecd8,
+    #d4a84c,
+    #a8d4c8,
+    #e8cc6a
+  );
+  background-size: 400% 400%;
+  animation: silkFlow 9s ease-in-out infinite;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@keyframes silkFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.scroll > :not(.scroll-aura):not(.scroll-silk):not(.ribbon) {
+  position: relative;
+  z-index: 2;
+}
+
+.scroll-inner {
+  position: relative;
+  z-index: 2;
+}
+
+.scroll-silk {
+  position: absolute;
+  inset: -4px;
+  width: calc(100% + 8px);
+  height: calc(100% + 8px);
+  left: -4px;
+  top: -4px;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+  filter: drop-shadow(0 0 6px rgba(201, 168, 76, 0.25));
+  opacity: 0.85;
+}
+
+.scroll-silk__path {
+  stroke-dasharray: 12 8;
+  animation: silkDash 22s linear infinite;
+}
+
+@keyframes silkDash {
+  to { stroke-dashoffset: -200; }
+}
+
+.ribbon {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.85;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation: ribbonFloat 6s ease-in-out infinite;
+}
+
+.ribbon--tl {
+  top: -4px;
+  left: -2px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56'%3E%3Cpath d='M4 8 Q28 4 40 20 Q48 32 52 48 Q36 40 20 44 Q8 36 4 8Z' fill='none' stroke='%23c9a84c' stroke-width='1.5' opacity='0.9'/%3E%3Cpath d='M8 12 Q24 20 32 36' fill='none' stroke='%23b8e0d8' stroke-width='1' stroke-linecap='round'/%3E%3Cpath d='M12 6 Q20 24 8 38' fill='none' stroke='%23e8cc6a' stroke-width='0.8' stroke-linecap='round' opacity='0.7'/%3E%3C/svg%3E");
+  animation-delay: 0s;
+}
+
+.ribbon--tr {
+  top: -4px;
+  right: -2px;
+  transform: scaleX(-1);
+  animation-delay: -1.5s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56'%3E%3Cpath d='M4 8 Q28 4 40 20 Q48 32 52 48 Q36 40 20 44 Q8 36 4 8Z' fill='none' stroke='%23c9a84c' stroke-width='1.5' opacity='0.9'/%3E%3Cpath d='M8 12 Q24 20 32 36' fill='none' stroke='%23b8e0d8' stroke-width='1' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.ribbon--bl {
+  bottom: -4px;
+  left: -2px;
+  transform: scaleY(-1);
+  animation-delay: -3s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56'%3E%3Cpath d='M4 8 Q28 4 40 20 Q48 32 52 48 Q36 40 20 44 Q8 36 4 8Z' fill='none' stroke='%239ecfc4' stroke-width='1.5'/%3E%3Cpath d='M10 14 Q30 28 44 42' fill='none' stroke='%23c9a84c' stroke-width='0.9' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.ribbon--br {
+  bottom: -4px;
+  right: -2px;
+  transform: scale(-1);
+  animation-delay: -4.5s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56'%3E%3Cpath d='M4 8 Q28 4 40 20 Q48 32 52 48 Q36 40 20 44 Q8 36 4 8Z' fill='none' stroke='%23c9a84c' stroke-width='1.5'/%3E%3C/svg%3E");
+}
+
+@keyframes ribbonFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.75; }
+  50% { transform: translateY(-3px) rotate(2deg); opacity: 1; }
+}
+
+.ribbon--tr {
+  animation-name: ribbonFloatTr;
+}
+
+@keyframes ribbonFloatTr {
+  0%, 100% { transform: scaleX(-1) translateY(0); opacity: 0.75; }
+  50% { transform: scaleX(-1) translateY(-3px); opacity: 1; }
+}
+
+.ribbon--bl {
+  animation-name: ribbonFloatBl;
+}
+
+@keyframes ribbonFloatBl {
+  0%, 100% { transform: scaleY(-1) translateY(0); opacity: 0.75; }
+  50% { transform: scaleY(-1) translateY(3px); opacity: 1; }
+}
+
+.ribbon--br {
+  animation-name: ribbonFloatBr;
+}
+
+@keyframes ribbonFloatBr {
+  0%, 100% { transform: scale(-1) translateY(0); opacity: 0.75; }
+  50% { transform: scale(-1) translateY(3px); opacity: 1; }
+}
+
+@keyframes scrollUnfurl {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 0;
+}
+
+.scroll-info {
+  text-align: center;
+}
+
+.seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  font-family: "Ma Shan Zheng", cursive;
+  font-size: 1.25rem;
+  color: #f4e4c4;
+  background: var(--cinnabar);
+  border: 2px solid #7a2020;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  transform: rotate(-4deg);
+}
+
+.scroll-motto {
+  margin-top: 0;
+  font-family: "Ma Shan Zheng", cursive;
+  font-size: 0.88rem;
+  letter-spacing: 0.22em;
+  color: var(--cinnabar);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.avatar-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  z-index: 2;
+}
+
+.avatar-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(201, 168, 76, 0.7) 60deg,
+    rgba(184, 224, 216, 0.6) 120deg,
+    transparent 180deg,
+    rgba(232, 204, 106, 0.5) 240deg,
+    transparent 300deg
+  );
+  animation: avatarHalo 8s linear infinite;
+  filter: blur(4px);
+  opacity: 0.85;
+}
+
+@keyframes avatarHalo {
+  to { transform: rotate(360deg); }
+}
+
+.avatar-frame {
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.avatar-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    var(--gold-bright),
+    #b8e4dc,
+    var(--gold),
+    #f0e8f8
+  );
+  background-size: 300% 300%;
+  animation: silkFlow 7s ease-in-out infinite;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.avatar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 252, 245, 0.9);
+  background: #1a2830;
+  box-shadow: 0 4px 16px rgba(61, 40, 24, 0.2);
+}
+
+.name {
+  font-family: "Ma Shan Zheng", "KaiTi", cursive;
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+  text-align: center;
+  text-shadow:
+    2px 2px 0 rgba(201, 168, 76, 0.2),
+    0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+.jianghu-rank {
+  font-family: "Ma Shan Zheng", cursive;
+  font-size: 0.92rem;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  color: var(--wood);
+  margin-bottom: 0.55rem;
+  text-align: center;
+}
+
+.jianghu-desc {
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.95;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  text-align: center;
+  margin: 0 auto;
+  padding: 0.6rem 0.75rem;
+  max-width: 30ch;
+  border-top: 1px solid rgba(168, 50, 50, 0.25);
+  border-bottom: 1px solid rgba(168, 50, 50, 0.25);
+  background: linear-gradient(
+    180deg,
+    rgba(201, 168, 76, 0.06) 0%,
+    transparent 50%,
+    rgba(201, 168, 76, 0.06) 100%
+  );
+}
+
+.jianghu-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.15rem 0 0.5rem;
+}
+
+.jianghu-divider__blade {
+  flex: 1;
+  max-width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  position: relative;
+}
+
+.jianghu-divider__blade::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-left: 5px solid var(--gold);
+}
+
+.jianghu-divider__blade:last-child::after {
+  right: auto;
+  left: 0;
+  border-left: none;
+  border-right: 5px solid var(--gold);
+}
+
+.jianghu-divider__text {
+  font-family: "Ma Shan Zheng", cursive;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  opacity: 0.9;
+}
+
+.contact-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.contact-link {
+  width: 100%;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.5rem 1rem;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.86rem;
+  border-radius: 999px 24px 999px 24px / 24px 999px 24px 999px;
+  background: linear-gradient(180deg, rgba(255, 252, 245, 0.95) 0%, rgba(235, 224, 200, 0.9) 100%);
+  border: 1px solid rgba(201, 168, 124, 0.5);
+  box-shadow:
+    0 0 12px rgba(201, 168, 76, 0.08),
+    0 3px 10px rgba(61, 40, 24, 0.08);
+  transition:
+    box-shadow 0.35s ease,
+    transform 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.contact-link:hover {
+  border-color: rgba(201, 168, 76, 0.85);
+  box-shadow:
+    0 0 20px rgba(184, 228, 220, 0.35),
+    0 0 28px rgba(201, 168, 76, 0.15),
+    0 6px 18px rgba(61, 40, 24, 0.1);
+  transform: translateY(-2px);
+}
+
+.contact-link:focus-visible {
+  outline: 2px solid var(--cinnabar);
+  outline-offset: 3px;
+}
+
+.contact-link--wechat {
+  background: linear-gradient(180deg, #f0fff4 0%, #e2f5e8 100%);
+  border-color: rgba(7, 193, 96, 0.45);
+}
+
+.contact-link--wechat .contact-icon {
+  color: #07a050;
+}
+
+.contact-link--wechat:hover {
+  border-color: #07c160;
+  box-shadow:
+    0 0 18px rgba(7, 193, 96, 0.2),
+    0 6px 18px rgba(61, 40, 24, 0.1);
+}
+
+/* 背景音乐 */
+.music-btn {
+  position: fixed;
+  top: max(0.75rem, env(safe-area-inset-top));
+  right: max(0.75rem, env(safe-area-inset-right));
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.75rem;
+  font-family: "Ma Shan Zheng", cursive;
+  font-size: 0.9rem;
+  color: #f4e4c4;
+  background: rgba(30, 40, 48, 0.82);
+  border: 1px solid rgba(201, 168, 76, 0.55);
+  border-radius: 999px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.music-btn:hover {
+  border-color: var(--gold-bright);
+  transform: scale(1.03);
+}
+
+.music-btn--playing .music-btn__icon {
+  animation: musicPulse 1s ease-in-out infinite;
+}
+
+.music-btn--missing {
+  opacity: 0.65;
+}
+
+@keyframes musicPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* 微信弹窗 */
+body.modal-open {
+  overflow: hidden;
+}
+
+.wechat-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.wechat-modal[hidden],
+.toast[hidden] {
+  display: none !important;
+}
+
+.wechat-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 12, 18, 0.72);
+  backdrop-filter: blur(4px);
+}
+
+.wechat-modal__panel {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  padding: 1.35rem 1.25rem 1.25rem;
+  text-align: center;
+  background: linear-gradient(180deg, #faf6ec 0%, #ebe0c8 100%);
+  border: 2px solid var(--wood-light);
+  border-radius: 12px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.45);
+}
+
+.wechat-modal__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.65rem;
+  border: none;
+  background: none;
+  font-size: 1.35rem;
+  line-height: 1;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.wechat-modal__title {
+  font-family: "Ma Shan Zheng", cursive;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--wood);
+  margin-bottom: 0.75rem;
+}
+
+.wechat-modal__qr {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  margin: 0 auto 0.65rem;
+  border: 1px solid rgba(7, 193, 96, 0.3);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.wechat-modal__hint {
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  margin-bottom: 0.35rem;
+}
+
+.wechat-modal__phone {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+.wechat-modal__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.wechat-modal__btn {
+  flex: 1;
+  padding: 0.55rem 0.5rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgba(107, 74, 42, 0.4);
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.wechat-modal__btn--primary {
+  background: #07c160;
+  border-color: #06a854;
+  color: #fff;
+}
+
+.toast {
+  position: fixed;
+  bottom: calc(5.5rem + env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 11;
+  max-width: 90%;
+  padding: 0.55rem 1rem;
+  font-size: 0.8rem;
+  color: #f4f0e8;
+  background: rgba(20, 28, 36, 0.92);
+  border: 1px solid rgba(201, 168, 76, 0.45);
+  border-radius: 999px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.contact-icon {
+  display: flex;
+  width: 18px;
+  height: 18px;
+  color: var(--cinnabar);
+  flex-shrink: 0;
+}
+
+.contact-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0;
+  padding-top: 0.5rem;
+  border-top: 1px dashed rgba(107, 74, 42, 0.3);
+  font-size: 0.65rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+}
+
+.sword-mark {
+  width: 3px;
+  height: 14px;
+  background: linear-gradient(180deg, var(--gold-bright), var(--wood-light));
+  border-radius: 1px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.sword-mark::before {
+  content: "";
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 5px solid var(--gold);
+}
+
+@media (max-width: 768px) {
+  .tv-hero {
+    width: 58%;
+    max-width: none;
+  }
+
+  .tv-hero--li img {
+    object-position: 75% 10%;
+  }
+
+  .tv-hero--zhao img {
+    object-position: 25% 10%;
+  }
+}
+
+@media (max-width: 480px) {
+  body.tv-scene--poster .tv-scene__poster {
+    background-position: center 15%;
+  }
+
+  .tv-hero {
+    width: 50%;
+    opacity: 0.85;
+  }
+
+  .scroll {
+    max-height: min(48vh, 360px);
+    padding: 0.75rem 1rem 0.9rem;
+  }
+
+  .hero-avatar .avatar-wrap {
+    width: 76px;
+    height: 76px;
+  }
+
+  body.tv-scene--poster .hero-avatar {
+    top: 9%;
+    left: 4%;
+  }
+
+  .name {
+    font-size: 1.5rem;
+  }
+
+  .jianghu-desc {
+    font-size: 0.76rem;
+    padding: 0.5rem 0.4rem;
+  }
+
+  .jianghu-rank {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .hero-avatar .avatar-wrap {
+    width: 68px;
+    height: 68px;
+  }
+
+  body.tv-scene--poster .hero-avatar {
+    top: 8%;
+    left: 3%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tv-scene__mist,
+  .leaf,
+  .scroll,
+  .tv-scene__poster,
+  .scroll-aura,
+  .scroll::before,
+  .scroll::after,
+  .scroll-silk__path,
+  .ribbon,
+  .hero-avatar,
+  .avatar-wrap::before,
+  .avatar-frame::before {
+    animation: none;
+    transition: none;
+  }
+
+  .contact-link:hover {
+    transform: none;
+  }
+}
